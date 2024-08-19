@@ -1,0 +1,123 @@
+/* General Styling */
+body {
+    background-color: #f0f0f5;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 2.5em;
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Game Board Styling */
+#game-board {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Ensures flexible grid layout */
+    grid-gap: 15px; /* Space between cards */
+    justify-items: center; /* Center the cards horizontally */
+    align-items: center; /* Center the cards vertically */
+}
+
+/* Card Styling */
+.card {
+    position: relative;
+    width: 100px;  /* Fixed width for cards */
+    height: 100px; /* Fixed height for cards */
+    background-color: #6c757d;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none; /* Hide the image until the card is flipped */
+}
+
+.card.flipped img,
+.card.matched img {
+    display: block; /* Show the image when the card is flipped or matched */
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.card.flipped:before,
+.card.matched:before {
+    background: none;
+}
+
+/* Score and Moves Styling */
+p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+#score, #moves {
+    font-weight: bold;
+}
+
+/* Button Styling */
+button {
+    margin-top: 20px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* אנימציה של רטט */
+@keyframes match-shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* אנימציה של שינוי צבע */
+@keyframes match-color-change {
+    0% { background-color: #28a745; }
+    50% { background-color: #17a2b8; }
+    100% { background-color: #28a745; }
+}
+
+/* להוסיף את האנימציה לקלף שמצאנו לו צמד */
+.card.matched {
+    animation: match-shake 0.5s ease, match-color-change 0.5s ease;
+}
